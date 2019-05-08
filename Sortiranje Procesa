@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Popis Procesa
+            Process[] popisProcesa1 = Process.GetProcesses();
+
+            //Sortiranje procesa od najveceg do najmanjeg 
+            for(int i = 0; i < popisProcesa1.Length; i++)
+            {
+                for (int j = 0; j < popisProcesa1.Length; j++)
+                {
+                    if (popisProcesa1[i].WorkingSet64 > popisProcesa1[j].WorkingSet64)
+                    {
+                        var pridrzi = popisProcesa1[i];
+                        popisProcesa1[i] = popisProcesa1[j];
+                        popisProcesa1[j] = pridrzi;
+                    }
+                    
+                }
+                //Procesi koje trose najvise memorije
+            }
+            for(int i = 0; i < 10; i++)
+            {
+                var p = popisProcesa1[i];
+                Console.WriteLine("{0, 15:0.000} MB - {1}", p.WorkingSet64/(double)(1024*1024), p.ProcessName);
+            }
+
+            //Procesi koji trose najvise vremena
+        }
+    }
+}
